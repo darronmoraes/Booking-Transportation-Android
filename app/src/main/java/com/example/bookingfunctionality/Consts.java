@@ -7,4 +7,8 @@ public class Consts {
 
     // Endpoints
     public static final String ENDPOINT_BUS_STOPS = "bus-stops";
+
+
+    // Buttons
+    public static final String BUTTON_SEARCH_BUS = "Search buses";
 }
