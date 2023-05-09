@@ -1,13 +1,13 @@
 package com.example.bookingfunctionality.api.response;
 
-import com.example.bookingfunctionality.models.Destination;
+import com.example.bookingfunctionality.models.Halts;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 public class BusStopsResponse {
     @SerializedName("result")
-    private List<Destination> result;
+    private List<Halts> result;
 
     @SerializedName("success")
     private Boolean success;
@@ -15,11 +15,11 @@ public class BusStopsResponse {
     @SerializedName("status")
     private Integer status;
 
-    public List<Destination> getResult() {
+    public List<Halts> getResult() {
         return result;
     }
 
-    public void setResult(List<Destination> result) {
+    public void setResult(List<Halts> result) {
         this.result = result;
     }
 

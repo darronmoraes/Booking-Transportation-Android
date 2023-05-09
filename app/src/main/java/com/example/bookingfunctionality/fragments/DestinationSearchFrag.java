@@ -1,5 +1,6 @@
 package com.example.bookingfunctionality.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,10 +17,11 @@ import android.view.ViewGroup;
 
 import com.example.bookingfunctionality.Consts;
 import com.example.bookingfunctionality.R;
+import com.example.bookingfunctionality.activity.MainActivity;
 import com.example.bookingfunctionality.adapters.DestinationAdapter;
 import com.example.bookingfunctionality.api.Client;
 import com.example.bookingfunctionality.api.response.BusStopsResponse;
-import com.example.bookingfunctionality.models.Destination;
+import com.example.bookingfunctionality.models.Halts;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +35,7 @@ public class DestinationSearchFrag extends Fragment {
 
     RecyclerView recyclerViewDestinations;
     SearchView searchViewDestination;
-    List<Destination> destinations;
+    List<Halts> destinations;
 
     DestinationAdapter.OnItemClickListener itemClickListener;
 
@@ -91,6 +93,7 @@ public class DestinationSearchFrag extends Fragment {
                             @Override
                             public void onItemClick(Integer destinationId, String destinationName) {
                                 Log.i("DESTINATION SELECTED", "onItemClick : " + destinationName);
+                                setUserDestination(destinationId, destinationName);
                             }
                         }));
                     }
@@ -111,9 +114,9 @@ public class DestinationSearchFrag extends Fragment {
 
     // filter search query function for destination search
     private void filterDestinations(String query) {
-        List<Destination> filterDestinations = new ArrayList<>();
+        List<Halts> filterDestinations = new ArrayList<>();
 
-        for (Destination destination : destinations) {
+        for (Halts destination : destinations) {
             if (destination.getName().toLowerCase().contains(query.toLowerCase())) {
                 filterDestinations.add(destination);
             }
@@ -124,5 +127,12 @@ public class DestinationSearchFrag extends Fragment {
                 Log.i("DESTINATION SELECTED FILTERED", "onItemClick : " + destinationName);
             }
         }));
+    }
+
+    public void setUserDestination(int destinationId, String destinationName) {
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.putExtra("destinationId", destinationId);
+        intent.putExtra("destinationName", destinationName);
+        startActivity(intent);
     }
 }

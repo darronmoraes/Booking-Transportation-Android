@@ -2,7 +2,7 @@ package com.example.bookingfunctionality.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Destination {
+public class Halts {
 
     @SerializedName("id")
     private Integer id;

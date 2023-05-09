@@ -10,19 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookingfunctionality.R;
-import com.example.bookingfunctionality.models.Destination;
+import com.example.bookingfunctionality.models.Halts;
 
 import java.util.List;
 
 public class DestinationAdapter extends RecyclerView.Adapter<DestinationAdapter.ViewHolder> {
 
-    List<Destination> destinationList;
+    List<Halts> destinationList;
     Context context;
 
     // Field for the listener
     public OnItemClickListener itemClickListener;
 
-    public DestinationAdapter(Context context, List<Destination> destinationList, OnItemClickListener listener) {
+    public DestinationAdapter(Context context, List<Halts> destinationList, OnItemClickListener listener) {
         this.context = context;
         this.destinationList = destinationList;
         this.itemClickListener = listener;
@@ -49,7 +49,7 @@ public class DestinationAdapter extends RecyclerView.Adapter<DestinationAdapter.
                 // use getAdapterPosition instead of position everytime
                 int position = holder.getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION && itemClickListener != null) {
-                    Destination clickedDestination = destinationList.get(position);
+                    Halts clickedDestination = destinationList.get(position);
                     String destinationName = clickedDestination.getName();
                     int destinationId = clickedDestination.getId();
                     itemClickListener.onItemClick(destinationId, destinationName);
@@ -69,7 +69,7 @@ public class DestinationAdapter extends RecyclerView.Adapter<DestinationAdapter.
         // Views
         TextView tvDestinationName;
 
-        public ViewHolder(@NonNull View itemView, final OnItemClickListener listener, final List<Destination> destinationList) {
+        public ViewHolder(@NonNull View itemView, final OnItemClickListener listener, final List<Halts> destinationList) {
             super(itemView);
 
             // init the views
