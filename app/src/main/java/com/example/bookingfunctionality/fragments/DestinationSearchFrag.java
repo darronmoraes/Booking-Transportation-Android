@@ -92,7 +92,6 @@ public class DestinationSearchFrag extends Fragment {
                         recyclerViewDestinations.setAdapter(new DestinationAdapter(getContext(), destinations, new DestinationAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(Integer destinationId, String destinationName) {
-                                Log.i("DESTINATION SELECTED", "onItemClick : " + destinationName);
                                 setUserDestination(destinationId, destinationName);
                             }
                         }));

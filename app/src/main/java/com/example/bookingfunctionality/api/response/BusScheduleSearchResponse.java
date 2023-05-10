@@ -14,4 +14,29 @@ public class BusScheduleSearchResponse {
 
     @SerializedName("status")
     private Integer status;
+
+
+    public List<BusScheduleResult> getResult() {
+        return result;
+    }
+
+    public void setResult(List<BusScheduleResult> result) {
+        this.result = result;
+    }
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 }

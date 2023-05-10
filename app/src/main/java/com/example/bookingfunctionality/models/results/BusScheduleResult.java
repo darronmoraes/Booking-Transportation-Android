@@ -10,33 +10,33 @@ import java.util.List;
 public class BusScheduleResult {
 
     @SerializedName("bus")
-    List<Bus> bus;
+    Bus bus;
     @SerializedName("route")
-    List<Route> route;
+    Route route;
     @SerializedName("schedule")
-    List<Schedule> schedule;
+    Schedule schedule;
 
-    public List<Bus> getBus() {
+    public Bus getBus() {
         return bus;
     }
 
-    public void setBus(List<Bus> bus) {
+    public void setBus(Bus bus) {
         this.bus = bus;
     }
 
-    public List<Route> getRoute() {
+    public Route getRoute() {
         return route;
     }
 
-    public void setRoute(List<Route> route) {
+    public void setRoute(Route route) {
         this.route = route;
     }
 
-    public List<Schedule> getSchedule() {
+    public Schedule getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(List<Schedule> schedule) {
+    public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
     }
 }

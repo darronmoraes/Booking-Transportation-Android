@@ -29,6 +29,7 @@ import com.example.bookingfunctionality.R;
 import com.example.bookingfunctionality.adapters.DestinationAdapter;
 import com.example.bookingfunctionality.api.Client;
 import com.example.bookingfunctionality.api.response.BusStopsResponse;
+import com.example.bookingfunctionality.fragments.AvailableBusScheduleFragment;
 import com.example.bookingfunctionality.fragments.DestinationSearchFrag;
 import com.example.bookingfunctionality.models.Halts;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     EditText etSource, etDestination;
     TextView tvDatePicker, activityTitle;
     Button btnSearchBus;
+
 
     // for fused location
     private FusedLocationProviderClient fusedLocationProviderClient;
@@ -75,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
 
     // for current date and date
     private int year, month, day;
+    String paramsDate;
+
+    // source and destination
+    String destinationName;
+    Integer destinationId;
+
+    String sourceName;
+    Integer sourceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +128,35 @@ public class MainActivity extends AppCompatActivity {
         });
 
         userSelectedDestination();
+
+        btnSearchBus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AvailableBusScheduleFragment fragment = new AvailableBusScheduleFragment();
+
+                // Create a Bundle to store the data
+                Bundle args = new Bundle();
+                args.putInt("sourceId", sourceId);
+                Log.i("DATA PASS", "source-id: " + sourceId);
+                args.putString("source", sourceName);
+                Log.i("DATA PASS", "source-name: " + sourceName);
+                args.putInt("destinationId", destinationId);
+                args.putString("destination", destinationName);
+                args.putString("date", paramsDate);
+                Log.i("DATA PASS", "onClick: Date " + paramsDate);
+
+                // set the arguments to the fragment
+                fragment.setArguments(args);
+
+                // frag transaction
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frameLayout_booking, fragment);
+                transaction.commit();
+
+                // hide views
+                hideViewsOnFragTransaction();
+            }
+        });
     }
 
     // function to initialize views
@@ -187,9 +226,16 @@ public class MainActivity extends AppCompatActivity {
         DateFormatSymbols dateFormatSymbols = new DateFormatSymbols();
         String[] months = dateFormatSymbols.getMonths();
 
+        // db pass data
+        // Increment the month value by 1
+        int actualMonth = month + 1;
+        paramsDate = year + "-" + actualMonth + "-" + day;
+        Log.i("DATA PASS", "onDateSet: " + paramsDate);
+
         if (month >= 0 && month <= 11) {
             monthName = months[month];
         }
+
         return day + " " + monthName + ", " + year;
     }
 
@@ -197,8 +243,8 @@ public class MainActivity extends AppCompatActivity {
     // function to get user destination
     public void userSelectedDestination() {
         Intent intent = getIntent();
-        Integer destinationId = intent.getIntExtra("destinationId", 0);
-        String destinationName = intent.getStringExtra("destinationName");
+        destinationId = intent.getIntExtra("destinationId", 0);
+        destinationName = intent.getStringExtra("destinationName");
         etDestination.setText(destinationName);
     }
 
@@ -281,6 +327,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    // getNearbySourceStop function
     public String getNearbySourceStop(List<Halts> sourceStops, Double currentLat, Double currentLong) {
         if (sourceStops == null || sourceStops.isEmpty()) {
             return "no bus stops found";
@@ -301,6 +349,8 @@ public class MainActivity extends AppCompatActivity {
             float distance = currentLocation.distanceTo(busStopLocation);
             Log.i("COMPARE LOCATION", currentLat + " " + currentLong + " " + lat + " " + lng);
             if (distance <= Consts.LOCATION_THRESHOLD) {
+                sourceId = sourceStops.get(i).getId();
+                sourceName = sourceStops.get(i).getName();
                 return sourceStops.get(i).getName();
             }
         }
