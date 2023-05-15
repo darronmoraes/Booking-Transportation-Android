@@ -1,14 +1,7 @@
 package com.example.bookingfunctionality.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,9 +17,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.bookingfunctionality.Consts;
 import com.example.bookingfunctionality.R;
-import com.example.bookingfunctionality.adapters.DestinationAdapter;
 import com.example.bookingfunctionality.api.Client;
 import com.example.bookingfunctionality.api.response.BusStopsResponse;
 import com.example.bookingfunctionality.fragments.AvailableBusScheduleFragment;
@@ -168,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         activityTitle = findViewById(R.id.textView_searchBus_activityTitle);
         etSource = findViewById(R.id.editText_source_stop);
         etDestination = findViewById(R.id.editText_destination_stop);
-        tvDatePicker = findViewById(R.id.textView_datePicker);
+        tvDatePicker = findViewById(R.id.textView_show_current_date);
         btnSearchBus = findViewById(R.id.button_search_buses_available);
 
         btnSearchBus.setText(Consts.BUTTON_SEARCH_BUS);
@@ -322,7 +320,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<BusStopsResponse> call, Throwable t) {
-                Log.i("SOURCE", "onFailure : " + t.getLocalizedMessage() + Arrays.toString(t.getStackTrace()));
+                Log.i("SOURCE", "onFailure : " + t.getLocalizedMessage());
             }
         });
     }

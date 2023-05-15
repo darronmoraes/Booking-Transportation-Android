@@ -19,7 +19,7 @@ public class Schedule {
     @SerializedName("id")
     private Integer id;
     @SerializedName("seats-available")
-    private Integer seatsAvailable;
+    private Integer availableSeats;
 
     public String getArrival() {
         return arrival;
@@ -77,11 +77,11 @@ public class Schedule {
         this.id = id;
     }
 
-    public Integer getSeatsAvailable() {
-        return seatsAvailable;
+    public Integer getAvailableSeats() {
+        return availableSeats;
     }
 
-    public void setSeatsAvailable(Integer seatsAvailable) {
-        this.seatsAvailable = seatsAvailable;
+    public void setAvailableSeats(Integer availableSeats) {
+        this.availableSeats = availableSeats;
     }
 }

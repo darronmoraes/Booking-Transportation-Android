@@ -49,6 +49,11 @@ public class AvailableBusScheduleFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initViews(view);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
 
         getAvailableBusSchedules();
     }
@@ -61,11 +66,11 @@ public class AvailableBusScheduleFragment extends Fragment {
     }
 
     private void getAvailableBusSchedules() {
-        Call<BusScheduleSearchResponse> busScheduleSearchResponseCall = Client.getInstance(Consts.BASE_URL_BUS).getRoute().getAllAvailableBuses(getSourceId(), getDestinationId(), getDate());
-        Log.i("TAG", "getAvailableBusSchedules: " + getSourceId() + " " + getDestinationId() + " " + getDate());
+        Call<BusScheduleSearchResponse> busScheduleSearchResponseCall = Client.getInstance(Consts.BASE_URL_BOOKING).getRoute().getAllAvailableBuses(getSourceId(), getDestinationId(), getDate());
+        Log.i("TAG", "getAvailableBusSchedules: params" + getSourceId() + " " + getDestinationId() + " " + getDate());
         busScheduleSearchResponseCall.enqueue(new Callback<BusScheduleSearchResponse>() {
             @Override
-            public void onResponse(Call<BusScheduleSearchResponse> call, Response<BusScheduleSearchResponse> response) {
+            public void onResponse(@NonNull Call<BusScheduleSearchResponse> call, @NonNull Response<BusScheduleSearchResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     busScheduleResultsList = response.body().getResult();
                     Log.i("TAG", "onResponse: " + busScheduleResultsList);

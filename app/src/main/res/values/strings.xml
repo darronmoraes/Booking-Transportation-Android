@@ -2,8 +2,4 @@
     <string name="app_name">Booking Functionality</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
-    <!-- Ip Address -->
-    <string name="ip_address">192.168.226.166</string>
 </resources>

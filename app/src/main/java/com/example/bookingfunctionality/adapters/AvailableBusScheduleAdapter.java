@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookingfunctionality.R;
 import com.example.bookingfunctionality.models.results.BusScheduleResult;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
@@ -40,8 +40,16 @@ public class AvailableBusScheduleAdapter extends RecyclerView.Adapter<AvailableB
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvBusRegNum.setText(busScheduleResults.get(position).getBus().getRegistrationNumber());
-        holder.tvBusType.setText(busScheduleResults.get(position).getBus().getType());
+
+        holder.tvBusRegNum.setText(busScheduleResults.get(holder.getAdapterPosition()).getBus().getRegistrationNumber());
+        holder.tvBusType.setText(busScheduleResults.get(holder.getAdapterPosition()).getBus().getType());
+        holder.tvSource.setText(busScheduleResults.get(holder.getAdapterPosition()).getRoute().getSource());
+        holder.tvDestination.setText(busScheduleResults.get(holder.getAdapterPosition()).getRoute().getDestination());
+//        String date = busScheduleResults.get(position).getSchedule().getDate();
+        holder.tvDate.setText(busScheduleResults.get(holder.getAdapterPosition()).getSchedule().getDate());
+        // seat-available is of type Integer so to hold it in TextView we need to convert it to String.valueOf()
+        holder.tvSeatsAvailable.setText(String.valueOf(busScheduleResults.get(holder.getAdapterPosition()).getSchedule().getAvailableSeats()));
+        holder.tvFare.setText(busScheduleResults.get(holder.getAdapterPosition()).getRoute().getFare());
     }
 
     @Override
@@ -52,8 +60,9 @@ public class AvailableBusScheduleAdapter extends RecyclerView.Adapter<AvailableB
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         // Views
-        TextView tvBusRegNum, tvBusType;
-        CardView cardViewBusScheduleItem;
+        TextView tvBusRegNum, tvBusType, tvSource, tvDestination, tvDate, tvSeatsAvailable, tvFare;
+//        CardView MaterialCardView;
+        MaterialCardView MaterialCardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,9 +72,17 @@ public class AvailableBusScheduleAdapter extends RecyclerView.Adapter<AvailableB
         }
 
         public void initViews(View view) {
-            cardViewBusScheduleItem = view.findViewById(R.id.cardView_bus_schedule);
+            // CardView init
+            MaterialCardView = view.findViewById(R.id.cardView_bus_schedule);
+
+            // TextView init
             tvBusRegNum = view.findViewById(R.id.textView_bus_reg_no);
             tvBusType = view.findViewById(R.id.textView_bus_type);
+            tvSource = view.findViewById(R.id.textView_source);
+            tvDestination = view.findViewById(R.id.textView_destination);
+            tvDate = view.findViewById(R.id.textView_date);
+            tvSeatsAvailable = view.findViewById(R.id.tv_seats_available);
+            tvFare = view.findViewById(R.id.textView_fare);
         }
     }
 }
