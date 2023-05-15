@@ -10,11 +10,11 @@ import java.util.List;
 public class BusScheduleResult {
 
     @SerializedName("bus")
-    Bus bus;
+    private Bus bus;
     @SerializedName("route")
-    Route route;
+    private Route route;
     @SerializedName("schedule")
-    Schedule schedule;
+    private Schedule schedule;
 
     public Bus getBus() {
         return bus;
